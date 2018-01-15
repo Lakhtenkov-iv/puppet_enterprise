@@ -1,0 +1,21 @@
+{
+  "version": "2017.3.2",
+  "master_install_location": "local",
+  "master_hostname": "master.mshome.net",
+  "master_alt_names": "puppet,master.mshome.net,puppetmaster,master",
+  "database": "install_postgres",
+  "console_password": "removed",
+  "splat": [
+
+  ],
+  "captures": [
+    "monolithic"
+  ],
+  "type": "monolithic",
+  "puppetdb_database_password": "removed",
+  "rbac_database_password": "removed",
+  "classifier_database_password": "removed",
+  "activity_database_password": "removed",
+  "orchestrator_database_password": "removed",
+  "database_password": "removed"
+}
