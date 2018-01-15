@@ -1,3 +1,0 @@
-- server: master.mshome.net
-  port: 4433
-  prefix: /classifier-api

@@ -1,3 +1,0 @@
-# managed by the PE mcollective::agent profile
-policy default deny
-allow	*	status update yum_clean apt_update yum_checkupdates apt_checkupdates checkupdates	*	*
