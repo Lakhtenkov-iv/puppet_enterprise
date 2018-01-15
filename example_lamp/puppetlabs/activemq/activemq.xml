@@ -1,0 +1,50 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:amq="http://activemq.apache.org/schema/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://activemq.apache.org/schema/core
+    http://activemq.apache.org/schema/core/activemq-core.xsd
+    http://activemq.apache.org/camel/schema/spring
+    http://activemq.apache.org/camel/schema/spring/camel-spring.xsd"><bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"><property name="locations"><value>file:${activemq.base}/conf/credentials.properties</value>
+</property>
+</bean>
+<broker brokerName="master.mshome.net" xmlns="http://activemq.apache.org/schema/core" dataDirectory="${activemq.base}/data" persistent="false" useJmx="true" schedulePeriodForDestinationPurge="300000"><sslContext><sslContext keyStorePassword="5fbcfeae6fed" keyStore="file:${activemq.base}/conf/broker.ks" trustStorePassword="5fbcfeae6fed" trustStore="file:${activemq.base}/conf/broker.ts"></sslContext>
+</sslContext>
+<managementContext><managementContext createConnector="false"></managementContext>
+</managementContext>
+<destinationPolicy><policyMap><policyEntries><policyEntry topic=">" producerFlowControl="false" gcInactiveDestinations="false"></policyEntry>
+<policyEntry queue=">" producerFlowControl="false" gcInactiveDestinations="false"></policyEntry>
+<policyEntry queue="*.reply.>" producerFlowControl="true" gcInactiveDestinations="true" inactiveTimoutBeforeGC="300000"></policyEntry>
+</policyEntries>
+</policyMap>
+</destinationPolicy>
+<transportConnectors><transportConnector name="openwire" uri="ssl://0.0.0.0:61616?transport.enabledProtocols=TLSv1,TLSv1.1,TLSv1.2&amp;transport.hbGracePeriodMultiplier=1.5"></transportConnector>
+<transportConnector name="stomp+ssl" uri="stomp+ssl://0.0.0.0:61613?transport.enabledProtocols=TLSv1,TLSv1.1,TLSv1.2&amp;transport.hbGracePeriodMultiplier=1.5"></transportConnector>
+</transportConnectors>
+<plugins><statisticsBrokerPlugin></statisticsBrokerPlugin>
+<timeStampingBrokerPlugin futureOnly="false" ttlCeiling="0" zeroExpirationOverride="30000"></timeStampingBrokerPlugin>
+<simpleAuthenticationPlugin><users><authenticationUser username="mcollective" password="P3Lm3qZ_ge5Y-qsf96pJhQ" groups="mcollective,admins,everyone"></authenticationUser>
+</users>
+</simpleAuthenticationPlugin>
+<authorizationPlugin><map><authorizationMap><authorizationEntries><authorizationEntry queue=">" admin="admins" read="admins" write="admins"></authorizationEntry>
+<authorizationEntry topic=">" admin="admins" read="admins" write="admins"></authorizationEntry>
+<authorizationEntry queue="mcollective.>" admin="mcollective" read="mcollective" write="mcollective"></authorizationEntry>
+<authorizationEntry topic="mcollective.>" admin="mcollective" read="mcollective" write="mcollective"></authorizationEntry>
+<authorizationEntry topic="ActiveMQ.Advisory.>" admin="everyone" read="everyone" write="everyone"></authorizationEntry>
+</authorizationEntries>
+</authorizationMap>
+</map>
+</authorizationPlugin>
+</plugins>
+<systemUsage><systemUsage><memoryUsage><memoryUsage limit="200mb"></memoryUsage>
+</memoryUsage>
+<storeUsage><storeUsage limit="1gb"></storeUsage>
+</storeUsage>
+<tempUsage><tempUsage limit="1gb"></tempUsage>
+</tempUsage>
+</systemUsage>
+</systemUsage>
+</broker>
+</beans>
+<!--
+    Centrally managed by Puppet version 5.3.3
+    For details on this file, visit https://docs.puppetlabs.com/mcollective/deploy/middleware/activemq.html
+-->

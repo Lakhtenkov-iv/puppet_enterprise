@@ -1,0 +1,6 @@
+motd::message: 'This machine is configured by ilakhtenkov'
+ntp::ntp_regional_server:
+  - 'by.pool.ntp.org'
+  - 'pl.pool.ntp.org'
+ntp::monitor: true
+ntp::ntp_local_server: '178.124.134.106'
